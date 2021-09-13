@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:invert="clr-namespace:appSync.Util"
+             x:Class="appSync.App">
+    <Application.Resources>
+
+         <!-- Converts -->
+        <ResourceDictionary>
+            <invert:BoolConverter x:Key="BoolConverter" />
+        </ResourceDictionary>
+
+        <!-- Cores Primarias -->
+        <Color x:Key="BlackSync">#000000</Color>
+        <Color x:Key="WhiteSync">#F6F6F6</Color>
+        <Color x:Key="RedSync">#F66968</Color>
+        <Color x:Key="BlueSync">#536db7</Color>
+        <Color x:Key="GraySync">#383838</Color>
+
+        <!-- Label Default -->
+        <Style x:Key="LabelDefault" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource GraySync}"/>
+            <Setter Property="FontSize" Value="Default" />
+        </Style>
+
+        <!-- Label Large -->
+        <Style x:Key="LabelLarge" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource GraySync}"/>
+            <Setter Property="FontSize" Value="Large" />
+        </Style>
+
+    </Application.Resources>
+</Application>

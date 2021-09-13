@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Background="{StaticResource WhiteSync}"
+    xmlns:pageModels="clr-namespace:appSync.ViewModel"
+    xmlns:Cell="clr-namespace:appSync.Component;assembly=appSync"
+    x:DataType="pageModels:UserListViewModel"
+    x:Class="appSync.View.UserListView">
+
+    <!-- ToolBar -->
+    <ContentPage.ToolbarItems>
+
+    <ToolbarItem 
+        Order="Primary" 
+        Icon="add.png"
+        Text="Add" 
+        Priority="0"
+        Command="{Binding AddCommand}"/>
+
+    <ToolbarItem 
+        Order="Primary" 
+        Icon="refresh.png"
+        Text="Refresh" 
+        Priority="1"
+        Command="{Binding RefreshCommand}"/>
+
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+
+        <Grid>
+
+            <ActivityIndicator
+                Color="{StaticResource BlackSync}"
+                IsRunning="True"
+                WidthRequest="{OnPlatform iOS='80', Android='60'}"
+                HeightRequest="{OnPlatform iOS='80', Android='60'}"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="CenterAndExpand"
+                IsVisible="{Binding IsLoad}" />
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <!-- Titulo da page -->
+                <Label
+                    Grid.Row="0"
+                    HorizontalOptions="Center"
+                    Text="Lista de Usuários"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center"
+                    Style="{StaticResource LabelLarge}" />
+
+                <CollectionView
+                    Grid.Row="1"
+                    Margin="5,5,5,10"
+                    ItemSizingStrategy="MeasureFirstItem"
+                    Background="{StaticResource WhiteSync}"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+                    ItemsSource="{Binding ListUser}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <!-- Cell Component -->
+                            <Cell:CellUser />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

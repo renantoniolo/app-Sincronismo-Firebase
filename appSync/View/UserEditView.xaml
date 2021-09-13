@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Background="{StaticResource WhiteSync}"
+    xmlns:pageModels="clr-namespace:appSync.ViewModel"
+    x:DataType="pageModels:UserEditViewModel"
+    x:Class="appSync.View.UserEditView">
+    <ContentPage.Content>
+        <Grid>
+
+            <ActivityIndicator
+                Color="{StaticResource BlackSync}"
+                IsRunning="True"
+                WidthRequest="{OnPlatform iOS='80', Android='60'}"
+                HeightRequest="{OnPlatform iOS='80', Android='60'}"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="CenterAndExpand"
+                IsVisible="{Binding IsLoad}" />
+     
+            <Grid
+                BackgroundColor="{StaticResource WhiteSync}"
+                Margin="0,3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="60" />
+                </Grid.RowDefinitions>
+
+                <Label
+                    Grid.Row="0"
+                    Text="Usuário"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center"
+                    Style="{StaticResource LabelLarge}" />
+      
+                <Grid
+                    Grid.Row="1"
+                    Margin="10,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="15" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="80" />
+                    </Grid.RowDefinitions>
+
+                    <Label
+                        Grid.Row="0"
+                        Text="Nome"
+                        HorizontalTextAlignment="Start"
+                        VerticalTextAlignment="Center"
+                        Style="{StaticResource LabelDefault}" />
+
+                    <Entry
+                        Grid.Row="1"
+                        Placeholder="Nome"
+                        VerticalOptions="Center"
+                        Text="{Binding InputName, Mode=TwoWay}"
+                        HorizontalOptions="FillAndExpand" />
+
+                    <Label
+                        Grid.Row="2"
+                        Text="Idade"
+                        HorizontalTextAlignment="Start"
+                        VerticalTextAlignment="Center"
+                        Style="{StaticResource LabelDefault}" />
+
+                    <Entry
+                        Grid.Row="3"
+                        Placeholder="Idade"
+                        Keyboard="Numeric"
+                        VerticalOptions="Center"
+                        Text="{Binding InputAge, Mode=TwoWay}"
+                        HorizontalOptions="FillAndExpand" />
+
+                    <Label
+                        Grid.Row="4"
+                        Text="Email"
+                        HorizontalTextAlignment="Start"
+                        VerticalTextAlignment="Center"
+                        Style="{StaticResource LabelDefault}" />
+
+                    <Entry
+                        Grid.Row="5"
+                        Placeholder="Email"
+                        Keyboard="Email"
+                        VerticalOptions="Center"
+                        Text="{Binding InputEmail, Mode=TwoWay}"
+                        HorizontalOptions="FillAndExpand" />
+
+                    <Label
+                        Grid.Row="6"
+                        Grid.Column="0"
+                        Text="Senha"
+                        HorizontalTextAlignment="Start"
+                        VerticalTextAlignment="Center"
+                        Style="{StaticResource LabelDefault}" />
+
+                    <Entry
+                        Grid.Row="7"
+                        Placeholder="Senha"
+                        Keyboard="Default"
+                        IsPassword="True"
+                        VerticalOptions="Center"
+                        Text="{Binding InputPassword, Mode=TwoWay}"
+                        HorizontalOptions="FillAndExpand" />
+
+                    <Label
+                        Grid.Row="8"
+                        Grid.Column="0"
+                        Text="Observação"
+                        HorizontalTextAlignment="Start"
+                        VerticalTextAlignment="Center"
+                        Style="{StaticResource LabelDefault}" />
+
+                    <Entry
+                        Grid.Row="9"
+                        Placeholder="Observação"
+                        Text="{Binding InputObservation, Mode=TwoWay}"
+                        HorizontalOptions="FillAndExpand" />
+
+                </Grid>
+
+                <!-- Botão Salvar -->
+                <Button
+                    Grid.Row="2"
+                    Text="Salvar"
+                    TextColor="{StaticResource WhiteSync}"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+                    BackgroundColor="{StaticResource BlueSync}"
+                    Command="{Binding SaveCommand}"/>
+
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
