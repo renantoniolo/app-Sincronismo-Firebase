@@ -95,7 +95,7 @@ namespace appSync.ViewModel
                         if (IsBusy) return;
                         IsBusy = true;
 
-                        await App.NavigationPush(new UserEditView());
+                        await App.NavigationPush(new UserEditView(null));
 
                         IsBusy = false;
                     }
@@ -120,6 +120,34 @@ namespace appSync.ViewModel
                         IsBusy = true;
 
                         await ThisOnAppearingAsync();
+
+                        IsBusy = false;
+                    }
+                    catch (Exception ex)
+                    {
+                        IsBusy = false;
+                        Debug.WriteLine("Error: " + ex.Message);
+                    }
+                });
+            }
+        }
+
+        public ICommand ClickListCommand
+        {
+            get
+            {
+                return new Command(async (obj) =>
+                {
+                    try
+                    {
+                        if (obj is null) return;
+
+                        if (IsBusy) return;
+                        IsBusy = true;
+
+                        var user = obj as User;
+
+                        await App.NavigationPush(new UserEditView(user));
 
                         IsBusy = false;
                     }

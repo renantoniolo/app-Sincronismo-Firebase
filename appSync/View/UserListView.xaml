@@ -62,6 +62,8 @@
                     Background="{StaticResource WhiteSync}"
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="FillAndExpand"
+                    SelectionChanged="CollectionView_SelectionChanged"
+                    SelectionMode="Single"
                     ItemsSource="{Binding ListUser}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>

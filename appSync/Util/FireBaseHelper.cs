@@ -23,6 +23,7 @@ namespace appSync.Util
             try
             {
                 firebase = new FirebaseClient("https://syncapp-eb274-default-rtdb.firebaseio.com/");
+                
             }
             catch(Exception ex)
             {

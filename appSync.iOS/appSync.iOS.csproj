@@ -123,7 +123,7 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2083" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
     <PackageReference Include="FirebaseDatabase.net">
       <Version>4.0.6</Version>
@@ -146,5 +146,8 @@
     <BundleResource Include="Resources\refresh%401x.png" />
     <BundleResource Include="Resources\refresh%402x.png" />
     <BundleResource Include="Resources\refresh%403x.png" />
+    <BundleResource Include="Resources\delete%401x.png" />
+    <BundleResource Include="Resources\delete%402x.png" />
+    <BundleResource Include="Resources\delete%403x.png" />
   </ItemGroup>
 </Project>

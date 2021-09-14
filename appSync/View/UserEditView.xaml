@@ -6,6 +6,17 @@
     xmlns:pageModels="clr-namespace:appSync.ViewModel"
     x:DataType="pageModels:UserEditViewModel"
     x:Class="appSync.View.UserEditView">
+        <!-- ToolBar -->
+    <ContentPage.ToolbarItems>
+
+    <ToolbarItem 
+        Order="Primary" 
+        Icon="delete"
+        Text="Delete" 
+        Priority="0"
+        Command="{Binding DeleteCommand}"/>
+
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Grid>
 
@@ -29,10 +40,19 @@
 
                 <Label
                     Grid.Row="0"
-                    Text="Usuário"
+                    Text="Salvar Usuário" 
                     HorizontalTextAlignment="Center"
                     VerticalTextAlignment="Center"
-                    Style="{StaticResource LabelLarge}" />
+                    Style="{StaticResource LabelLarge}" >
+                    <Label.Triggers>
+                        <DataTrigger
+                            Binding="{Binding IsEdit, Mode=TwoWay}"
+                            TargetType="Label"
+                            Value="True">
+                            <Setter Property="Text" Value="Editar Usuário" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
       
                 <Grid
                     Grid.Row="1"

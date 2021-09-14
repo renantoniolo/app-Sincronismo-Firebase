@@ -13,17 +13,27 @@ namespace appSync.ViewModel
         #region Variaveis locais
 
         private IAlertService alertService;
+        private User user;
 
         #endregion
 
-        public UserEditViewModel()
+        public UserEditViewModel(User user)
         {
+            this.user = user;
             this.alertService = DependencyService.Get<IAlertService>();
         }
 
         internal async Task ThisOnAppearing()
         {
-
+            if(user != null)
+            {
+                IsEdit = true;
+                InputName = user?.Name;
+                InputEmail = user?.Email;
+                InputAge = Convert.ToInt32(user.Age);
+                InputPassword = user?.Password;
+                InputObservation = user?.Observation;
+            }
         }
 
         #region Propriedades
@@ -37,6 +47,17 @@ namespace appSync.ViewModel
             {
                 isload = value;
                 this.Notify(nameof(IsLoad));
+            }
+        }
+
+        private bool isEdit = false;
+        public bool IsEdit
+        {
+            get { return isEdit; }
+            set
+            {
+                isEdit = value;
+                this.Notify(nameof(IsEdit));
             }
         }
 
@@ -126,17 +147,22 @@ namespace appSync.ViewModel
                         user.Name = inputName;
                         user.Age = Convert.ToInt32(inputAge);
                         user.Email = inputEmail;
-                        //var base64 = Convert.FromBase64String(inputPassword);
-                        user.Password = inputPassword;//System.Text.Encoding.UTF8.GetString(base64);
+                        user.Password = inputPassword;
 
                         // Grava
-                        await App.firebaseDB.AdddUser(user);
+                        if (this.user is null)
+                        {
+                            await App.firebaseDB.AdddUser(user);
+                        }
+                        else // Atualiza
+                        {
+                            await App.firebaseDB.UpdateUser(user);
+                        }
 
                         // Remove a page da pilha
                         await App.NavigationPop();
 
                         IsBusy = false;
-                        IsLoad = true;
                     }
                     catch (Exception ex)
                     {
@@ -146,7 +172,58 @@ namespace appSync.ViewModel
                     }
                     finally
                     {
+                        IsLoad = false;
+                    }
+                });
+            }
+        }
+
+        public ICommand DeleteCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    try
+                    {
+                        if (!IsEdit)
+                            return;
+
+                        if (IsBusy) return;
+                        IsBusy = true;
+
+                        if (String.IsNullOrEmpty(inputEmail))
+                        {
+                            IsBusy = false;
+                            await alertService.ShowAsync("ATENÇÃO", "Impossível excluir sem email!", "Ok");
+                            return;
+                        }
+
                         IsLoad = true;
+
+                        if (this.user is null)
+                        {
+                            IsBusy = false;
+                            return;
+                        }
+
+                        // delete user selecionado
+                        await App.firebaseDB.DeleteUser(this.user);
+
+                        // Remove a page da pilha
+                        await App.NavigationPop();
+
+                        IsBusy = false;
+                    }
+                    catch (Exception ex)
+                    {
+                        IsBusy = false;
+                        await alertService.ShowAsync("ATENÇÃO", "Falha ao gravar esse usuário.", "Ok");
+                        Debug.WriteLine("Error: " + ex.Message);
+                    }
+                    finally
+                    {
+                        IsLoad = false;
                     }
                 });
             }
