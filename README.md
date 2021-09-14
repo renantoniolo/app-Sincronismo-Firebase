@@ -9,8 +9,8 @@
   
  ## Print Screen :foggy:
  
-| ![image01](printscreen/android.png) | ![image02](printscreen/ios.png)|
-|:---:|:---:|
-| Android | iOS |
+| ![image01](imagens/syncFirebase.gif) |
+|:---:|
+| Sincronismo Firebase Database |
 
 
